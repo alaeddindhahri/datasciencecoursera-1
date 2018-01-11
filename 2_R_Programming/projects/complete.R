@@ -5,7 +5,7 @@ complete <- function(directory,  id = 1:332) {
   
   # Reading in all files and making a large data.table
   lst <- lapply(fileNames, data.table::fread)
-  dt <- rbindlist(lst)
+  dt <- do.call(rbind,lst) #in case you get error about R couldn't find rbindlist
   
   return(dt[complete.cases(dt), .(nobs = .N), by = ID])
   
